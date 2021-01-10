@@ -36,15 +36,6 @@ app.get("/galaxies", async (req, res) => {
 
 })
 
-
-// app.use((req, res, next) => {
-//     console.log(req.body, req.headers, req.query)
-//     if (req.body.code == 911)
-//         res.sendStatus(403)
-//     else
-//         next()
-// });
-
 const server = createServer(app);
 
 server.listen(5000, () => {
