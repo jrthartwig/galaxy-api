@@ -8,15 +8,14 @@ database.createDatabase;
 server.app.use(express.json());
 
 server.app.get("/galaxies", async (req, res) => {
+    const index = "0";
     const querySpec = {
-        query: "SELECT * from c"
+        query: "SELECT gp.url FROM GalaxyPhotos gp WHERE gp.id = '0'"
     };
 
     const result = await database.container.items
         .query(querySpec)
         .fetchAll();
-
-    console.log(result);
 
     res.json(result)
 })
