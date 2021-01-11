@@ -8,14 +8,19 @@ database.createDatabase;
 server.app.use(express.json());
 
 server.app.get("/galaxies", async (req, res) => {
-    const index = "0";
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    const index = getRandomInt(3)
     const querySpec = {
-        query: "SELECT gp.url FROM GalaxyPhotos gp WHERE gp.id = '0'"
+        query: "SELECT * from GalaxyPhotos"
     };
 
     const result = await database.container.items
         .query(querySpec)
-        .fetchAll();
+        .fetchAll()
 
-    res.json(result)
+    res.json(result.resources[index])
 })
