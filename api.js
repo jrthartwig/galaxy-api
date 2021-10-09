@@ -1,26 +1,37 @@
-const server = require('./server');
-const express = require('express');
-const database = require('./data/database');
+var axios = require("axios");
+const database = require("./data/database");
 
-server.startMyServer;
-database.createDatabase;
+const getMeasurements = () => {
+  var config = {
+    method: "get",
+    url: "http://192.168.2.20/api/values/99",
+    headers: {},
+  };
 
-server.app.use(express.json());
+  const measurements = axios(config)
+    .then(function (response) {
+      return JSON.stringify(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
-server.app.get("/galaxies", async (req, res) => {
+  return measurements;
+};
 
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * Math.floor(max));
-    }
+const postMeasurements = async (measurements) => {
+  var jsonMeasurements = JSON.parse(measurements);
 
-    const index = getRandomInt(3)
-    const querySpec = {
-        query: "SELECT * from GalaxyPhotos"
-    };
+  database.createDatabase;
 
-    const result = await database.container.items
-        .query(querySpec)
-        .fetchAll()
+  const { resource: createdItem } = await database.container.items.create(
+    jsonMeasurements
+  );
 
-    res.json(result.resources[index])
-})
+  console.log(
+    `\r\nCreated new item: ${createdItem.Address} - ${createdItem.created_at}\r\n`
+  );
+};
+
+exports.getMeasurements = getMeasurements;
+exports.postMeasurements = postMeasurements;

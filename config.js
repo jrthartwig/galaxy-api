@@ -1,9 +1,9 @@
 const config = {
-    endpoint: "https://galaxy-db.documents.azure.com:443/",
-    key: "nsDGrX8GkUU8hyGTm2F80Bp1B5rstOO8jobZBKP0m6oEHOphGEWj9RllHFvqKFlfmJvOgBxAQtQkr5he0t8dbQ==",
-    databaseId: "Galaxies",
-    containerId: "GalaxyPhotos",
-    partitionKey: { kind: "Hash", paths: ["/category"] }
+    endpoint: "https://experiments.documents.azure.com:443/",
+    key: "EuxdciJI1SA2xVP4vxZOFZCCUAITeIwklos1YHYraeQMT2w4OoaExx9Ezupg1KITxo2JMw1zzhYEeIISmbw4eQ==",
+    databaseId: "sensors",
+    containerId: "measurements",
+    partitionKey: { kind: "Hash", paths: ["/Address"] }
 };
 
 module.exports = config;
